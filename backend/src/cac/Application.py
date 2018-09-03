@@ -2,9 +2,10 @@ import sys
 import logging
 
 from .ryu.Controller import RyuController
-from .caller.Controller import AriController
+from .ari.Controller import AriController
 
 class Application:
+  ''' Start listen in ari and exposes the ws-front-service to webapp '''
   def __init__(self):
     ''' constructor '''
     self.listen = False
@@ -13,9 +14,10 @@ class Application:
     self.ariController = AriController(self.ryuController)
 
   def run(self):
-    ''' Run application. Start listen in ari and exposes the ws-front-service to webapp '''
+    ''' Run Application.
+        If Ari connects successfuly, Application state switches to listening Mode On '''
     try:
-      self.ariController.start()
+      self.ariController.run()
       self.listen = True
       logging.info('Start Stasis Application')
     except Exception as error:

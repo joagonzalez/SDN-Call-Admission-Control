@@ -11,6 +11,7 @@ class AriController:
     self.bridges = []
     self.client = None
     self.ryuApi = ryuApi
+    self.setup()
 
   def connect(self):
     try:
@@ -24,19 +25,19 @@ class AriController:
     return self.ryuApi.queryForGetNodes()
 
   def onStartCallback(self, channel, event):
-    ''' initialize channels and events '''
+    ''' initialize channels and events. Aca va la logica de los scripts que viste en los exapmles '''
     print(channel)
     print(event)
 
   def onEndCallback(self, channel, event):
     ''' Hangout bridges, channels and stop listening. Clean stuff '''
 
-  def start(self):
-    ''' Starts Stasis program and bind the events for the application '''
-    print('estarteando Stasis App')
+  def setup(self):
+    ''' Setup Stasis Program. Create connection to ari and bind the listen events for the application '''
     self.client = self.connect()
     self.client.on_event('StasisStart', self.onStartCallback)
     
   def run(self):
-    print('Start running bitch!')
+    ''' Connect to Ari Websocket and registers as "cac" Module
+        in order to be able to be used in extensions.conf '''
     self.client.run(apps='cac')
