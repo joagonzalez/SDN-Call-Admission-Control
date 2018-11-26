@@ -31,6 +31,9 @@ $ ryu-manager ryu.app.qos_simple_switch_13_CAC ryu.app.qos_simple_switch_rest_13
 ### Initialize Ryu Controller test
 $ ryu-manager ryu.app.simple_switch_13 ryu.app.ofctl_rest
 
+### Ryu Controller test graphics (/ofworkspace/ryu)
+$ PYTHONPATH=. ./bin/ryu run --observe-links ryu/app/gui_topology/gui_topology.py ryu.app.qos_simple_switch_13_CAC ryu.app.qos_simple_switch_rest_13_CAC ryu.app.rest_conf_switch ryu.app.rest_qos
+
 ## Emulate Switches with mininet
 $ sudo mn --topo single,5 --mac --switch ovsk --controller remote
 
